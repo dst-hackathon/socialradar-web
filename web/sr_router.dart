@@ -12,23 +12,41 @@ class SrRouter extends PolymerElement {
    
     router.root
         ..addRoute(name: 'home', defaultRoute: true, path: '/home', enter: showHome)
-        ..addRoute(name: 'signin', path: '/signin', enter: showSignin);
+        ..addRoute(name: 'signin', path: '/signin', enter: showSignin)
+        ..addRoute(name: 'questions', path: '/questions', enter: showQuestions)
+        ..addRoute(name: 'result', path: '/result', enter: showResult);
 
     querySelector('#linkHome').attributes['href'] = router.url('home');
     querySelector('#linkSignIn').attributes['href'] = router.url('signin');
+    querySelector('#linkQuestions').attributes['href'] = router.url('questions');
+    querySelector('#linkResult').attributes['href'] = router.url('result');
 
     router.listen();
   }
   
   showHome(RouteEvent e) {
     print('Home');
-    querySelector('#home').classes.add('core-selected');
-    querySelector('#signin').classes.remove('core-selected');
+    selectSection('section#home');
   }
   
   showSignin(RouteEvent e) {
     print('Sign In');
-    querySelector('#signin').classes.add('core-selected');
-    querySelector('#home').classes.remove('core-selected'); 
+    selectSection('#signin');
+  }
+  
+  showQuestions(RouteEvent e) {
+    print('Questions');
+    selectSection('#questions');
+  }
+  
+  showResult(RouteEvent e) {
+    print('Result');
+    selectSection('#result');
+  }
+  
+  selectSection(String sectionSelector) {
+    querySelectorAll('section').classes.remove('core-selected');
+    querySelector(sectionSelector).classes.add('core-selected');
+
   }
 }
