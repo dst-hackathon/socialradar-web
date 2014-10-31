@@ -6,25 +6,31 @@
 
 <polymer-element name="sign-in">
   <template>
+    <div class="container">
       <paper-tabs selected="0">
         <paper-tab on-click={{toggleSigninForm}}>Sign In</paper-tab>
         <paper-tab on-click={{toggleSigninForm}}>Sign Up</paper-tab>
       </paper-tabs>
-  
-    <form id="signinForm" hidden?={{hiddenSigninForm}}>
-      <paper-input type="email" label="E-mail Address" floatingLabel="true"></paper-input>
-      <paper-input type="password" label="Password" floatingLabel="true"></paper-input>
-      <paper-button raised="true" class="signinButton" role="button">Sign In</paper-button>
-    </form>
-    
-    <form id="registerForm" hidden?={{hiddenRegisterForm}}>
-      <paper-input type="email" label="E-mail Address" floatingLabel="true"></paper-input>
-      <paper-input type="text" label="Username" floatingLabel="true"></paper-input>
-      <paper-input type="password" label="Password" floatingLabel="true"></paper-input>
-      <paper-input type="password" label="Confirmed Password" floatingLabel="true"></paper-input>
-      <paper-button raised="true" class="registerButton" role="button">Register</paper-button>
-    </form>
+      
+      <form id="signinForm" hidden?={{hiddenSigninForm}}>
+        <paper-input type="email" label="E-mail Address" floatingLabel="true"></paper-input>
+        <paper-input type="password" label="Password" floatingLabel="true"></paper-input>
+        <paper-button raised="true" class="signinButton" role="button">Sign In</paper-button>
+      </form>
+      
+      <form id="registerForm" hidden?={{hiddenRegisterForm}}>
+        <paper-input type="email" label="E-mail Address" floatingLabel="true"></paper-input>
+        <paper-input type="text" label="Username" floatingLabel="true"></paper-input>
+        <paper-input type="password" label="Password" floatingLabel="true"></paper-input>
+        <paper-input type="password" label="Confirmed Password" floatingLabel="true"></paper-input>
+        <paper-button raised="true" class="registerButton" role="button">Register</paper-button>
+      </form>
+    </div>
+      
     <style>
+      .container {
+        margin-top: 20px;
+      }
       paper-input {
         width: 17em;
         font-size: 20px;
