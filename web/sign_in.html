@@ -1,0 +1,20 @@
+<link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="packages/paper_elements/paper_input.html">
+
+<polymer-element name="sign-in">
+  <template>
+    
+    <paper-input label="E-mail Address" floatingLabel="true"></paper-input>
+    <paper-input label="Password" floatingLabel="true"></paper-input>
+    
+    <style>
+      paper-input {
+        color: orange;
+      }
+      paper-input.focused-underline {
+        color: orange;
+      }
+    </style>
+  </template>
+  <script type="application/dart" src="sign_in.dart"></script>
+</polymer-element>
