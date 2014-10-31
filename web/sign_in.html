@@ -1,20 +1,36 @@
 <link rel="import" href="packages/polymer/polymer.html">
 <link rel="import" href="packages/paper_elements/paper_input.html">
+<link rel="import" href="packages/paper_elements/paper_button.html">
 
 <polymer-element name="sign-in">
   <template>
+    <form id="signinForm">
+      <paper-input type="email" label="E-mail Address" floatingLabel="true"></paper-input>
+      <paper-input type="password" label="Password" floatingLabel="true"></paper-input>
+      <paper-button raised="true" class="signinButton" role="button">Sign In</paper-button>
+    </form>
     
-    <paper-input label="E-mail Address" floatingLabel="true"></paper-input>
-    <paper-input label="Password" floatingLabel="true"></paper-input>
+    <paper-button raised="false" class="signupButton" role="button">Sign Up</paper-button>
     
+    <form id="registerForm">
+      <paper-input type="email" label="E-mail Address" floatingLabel="true"></paper-input>
+      <paper-input type="text" label="Username" floatingLabel="true"></paper-input>
+      <paper-input type="password" label="Password" floatingLabel="true"></paper-input>
+      <paper-input type="password" label="Confirmed Password" floatingLabel="true"></paper-input>
+      <paper-button raised="true" class="registerButton" role="button">Register</paper-button>
+    </form>
     <style>
+      template {
+        font-size: 30px;
+      }
+      
       paper-input {
-        color: orange;
+        width: 17em;
       }
-      paper-input.focused-underline {
-        color: orange;
-      }
+      
+      
     </style>
   </template>
   <script type="application/dart" src="sign_in.dart"></script>
+  
 </polymer-element>
