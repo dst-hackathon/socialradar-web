@@ -1,18 +1,23 @@
 <link rel="import" href="packages/polymer/polymer.html">
 <link rel="import" href="packages/paper_elements/paper_input.html">
 <link rel="import" href="packages/paper_elements/paper_button.html">
+<link rel="import" href="packages/paper_elements/paper_tabs.html">
+<link rel="import" href="packages/paper_elements/paper_tab.html">
 
 <polymer-element name="sign-in">
   <template>
-    <form id="signinForm">
+      <paper-tabs selected="0">
+        <paper-tab on-click={{toggleSigninForm}}>Sign In</paper-tab>
+        <paper-tab on-click={{toggleSigninForm}}>Sign Up</paper-tab>
+      </paper-tabs>
+  
+    <form id="signinForm" hidden?={{hiddenSigninForm}}>
       <paper-input type="email" label="E-mail Address" floatingLabel="true"></paper-input>
       <paper-input type="password" label="Password" floatingLabel="true"></paper-input>
       <paper-button raised="true" class="signinButton" role="button">Sign In</paper-button>
     </form>
     
-    <paper-button raised="false" class="signupButton" role="button">Sign Up</paper-button>
-    
-    <form id="registerForm">
+    <form id="registerForm" hidden?={{hiddenRegisterForm}}>
       <paper-input type="email" label="E-mail Address" floatingLabel="true"></paper-input>
       <paper-input type="text" label="Username" floatingLabel="true"></paper-input>
       <paper-input type="password" label="Password" floatingLabel="true"></paper-input>
@@ -20,14 +25,13 @@
       <paper-button raised="true" class="registerButton" role="button">Register</paper-button>
     </form>
     <style>
-      template {
-        font-size: 30px;
-      }
-      
       paper-input {
         width: 17em;
+        font-size: 20px;
       }
-      
+      paper-button {
+        font-size: 20px;
+      }
       
     </style>
   </template>
