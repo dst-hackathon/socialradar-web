@@ -2,6 +2,9 @@
 <link rel="import" href="packages/paper_elements/paper_button.html">
 <link rel="import" href="packages/core_elements/core_scroll_header_panel.html">
 <link rel="import" href="packages/core_elements/core_toolbar.html">
+<link rel="import" href="packages/paper_elements/paper_tabs.html">
+<link rel="import" href="packages/paper_elements/paper_tab.html">
+<link rel="import" href="packages/paper_elements/paper_icon_button.html">
 <link rel="import" href="question_dropdown.html">
 
 <polymer-element name="question-list">
@@ -9,11 +12,11 @@
     <style>
     </style>
     <template if="{{!categories.isEmpty}}">
-      <ul>
+      <paper-tabs selected="0">
         <template repeat="{{cat in categories}}">
-          <li on-click="{{categoryClick}}">{{cat.id}}</li>
+          <paper-tab on-click={{categoryClick}}><paper-icon-button src="test.png"></paper-icon-button></paper-tab>
         </template>
-      </ul>
+      </paper-tabs>
     </template>
     <question-dropdown questions="{{questions}}" on-core-select="{{questionSelect}}"></question-dropdown>
     <paper-button raised>Go</paper-button>

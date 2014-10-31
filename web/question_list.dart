@@ -12,7 +12,9 @@ class QuestionList extends PolymerElement {
   @observable List<Question> questions2 = [];
   
   QuestionList.created() : super.created() {
-    retrieveCategories();
+    //retrieveCategories();
+    String json = '[{"id": "1", "order": "1", "text": "What are your favorite menus?"},{"id": "2", "order": "2", "text": "What sports do you play?"}]';
+    parseCategory(json);
   }
   
   retrieveCategories() {
@@ -23,7 +25,7 @@ class QuestionList extends PolymerElement {
       List questions = JSON.decode(jsonString);
       this.categories = [];
       for( var question in questions ) {
-        Question q = new Question(question["id"], question["order"], question["text"]);
+        Question q = new Question(question["id"], question["order"], question["text"], question["type"]);
         this.categories.add(q);
       }
   }
