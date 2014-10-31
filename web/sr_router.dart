@@ -14,19 +14,14 @@ class SrRouter extends PolymerElement {
     var router = new Router(useFragment: true);
 
     router.root
-        ..addRoute(
-            name: 'home',
-            defaultRoute: true,
-            path: '/home',
-            enter: showHome)
+        ..addRoute(name: 'home', defaultRoute: true, path: '/home', enter: showHome)
         ..addRoute(name: 'signin', path: '/signin', enter: showSignin)
         ..addRoute(name: 'questions', path: '/questions', enter: showQuestions)
         ..addRoute(name: 'result', path: '/result', enter: showResult);
 
     querySelector('#linkHome').attributes['href'] = router.url('home');
     querySelector('#linkSignIn').attributes['href'] = router.url('signin');
-    querySelector('#linkQuestions').attributes['href'] =
-        router.url('questions');
+    querySelector('#linkQuestions').attributes['href'] = router.url('questions');
     querySelector('#linkResult').attributes['href'] = router.url('result');
 
     router.listen();
@@ -35,7 +30,7 @@ class SrRouter extends PolymerElement {
   @override
   void attached() {
     super.attached();
-    scaffold = $['scaffold'];
+    scaffold = querySelector('#scaffold');
   }
 
   showHome(RouteEvent e) {
