@@ -1,10 +1,14 @@
 import 'package:polymer/polymer.dart';
-import 'dart:html' show Event, Node;
+import 'dart:html' show Event, Node, HttpRequest;
+import 'dart:convert' show JSON;
+import 'dart:async' show Future;
+import 'question.dart' show Question;
 
 @CustomTag('question-list')
 class QuestionList extends PolymerElement {
+  static const String QUESTIONS_PATH = "http://api.radar.codedeck.com/questions";
   @observable List<String> categories;
-  @observable List<String> questions;
+  @observable List<Question> questions;
   
   QuestionList.created() : super.created() {
     retrieveCategories();
@@ -17,23 +21,25 @@ class QuestionList extends PolymerElement {
   categoryClick(Event e, var detail, Node target) {
     e.preventDefault();
     print("Category clicked");
+    this.questions = [];
     // Use its text to query for now.
     String selectedCategory = target.text;
     retrieveQuestionList(selectedCategory);
   }
   
-  questionClick(Event e, var detail, Node target) {
-    e.preventDefault();
-    print("Question clicked");
-  }
   
   retrieveQuestionList(String category) {
     print("Selected category: $category");
-    if( category == "Food") {
-      questions = [];
-    }
-    else {
-      questions= ["Football", "Baseball", "Basketball"]; 
+    HttpRequest.getString(QUESTIONS_PATH)
+            .then(parseQuestion);
+  }
+  
+  parseQuestion(String jsonString) {
+    List questions = JSON.decode(jsonString);
+    this.questions = [];
+    for( var question in questions ) {
+      Question q = new Question(question["id"], question["order"], question["text"]);
+      this.questions.add(q);
     }
   }
 }

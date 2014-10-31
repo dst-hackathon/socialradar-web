@@ -1,0 +1,19 @@
+<link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="packages/paper_elements/paper_button.html">
+<link rel="import" href="packages/core_elements/core_scroll_header_panel.html">
+<link rel="import" href="packages/core_elements/core_toolbar.html">
+<link rel="import" href="packages/core_elements/core_dropdown_menu.html">
+<polymer-element name="question-dropdown">
+  <template>
+    <style>
+    </style>
+    <template if="{{!questions.isEmpty}}">
+      <core-dropdown-menu>
+        <template repeat="{{question in questions}}">
+          <core-item label="{{question.text}}"></core-item>
+        </template>
+      </core-dropdown-menu>
+    </template>
+  </template>
+  <script type="application/dart" src="question_dropdown.dart"></script>
+</polymer-element>

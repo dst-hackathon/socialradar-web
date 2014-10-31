@@ -1,23 +1,23 @@
 <link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="packages/paper_elements/paper_button.html">
+<link rel="import" href="packages/core_elements/core_scroll_header_panel.html">
+<link rel="import" href="packages/core_elements/core_toolbar.html">
+<link rel="import" href="question_dropdown.html">
 
 <polymer-element name="question-list">
   <template>
     <style>
     </style>
+    
     <template if="{{!categories.isEmpty}}">
-      <ul>
-        <template repeat="{{cat in categories}}">
-          <li on-click="{{categoryClick}}">{{cat}}</li>
-        </template>
-      </ul>
-    </template>
-    <template if="{{!questions.isEmpty}}">
-      <ul>
-        <template repeat="{{question in questions}}">
-          <li on-click="{{questionClick}}">{{question}}</li>
-        </template>
-      </ul>
-    </template>
+        <ul>
+          <template repeat="{{cat in categories}}">
+            <li on-click="{{categoryClick}}">{{cat}}</li>
+          </template>
+        </ul>
+      </template>
+      <question-dropdown questions="{{questions}}"></question-dropdown>
+      <paper-button raised>Go</paper-button>
   </template>
   <script type="application/dart" src="question_list.dart"></script>
 </polymer-element>
