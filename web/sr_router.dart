@@ -1,9 +1,12 @@
 import 'package:polymer/polymer.dart';
 import 'package:route_hierarchical/client.dart';
+import 'package:core_elements/core_scaffold.dart';
 import 'dart:html';
 
 @CustomTag('sr-router')
 class SrRouter extends PolymerElement {
+  
+  CoreScaffold scaffold;
   
   SrRouter.created() : super.created() {
     print('created');
@@ -22,6 +25,8 @@ class SrRouter extends PolymerElement {
     querySelector('#linkResult').attributes['href'] = router.url('result');
 
     router.listen();
+    
+    scaffold = querySelector('#scaffold') as CoreScaffold;
   }
   
   showHome(RouteEvent e) {
@@ -47,6 +52,6 @@ class SrRouter extends PolymerElement {
   selectSection(String sectionSelector) {
     querySelectorAll('section').classes.remove('core-selected');
     querySelector(sectionSelector).classes.add('core-selected');
-
+    scaffold.closeDrawer();
   }
 }
