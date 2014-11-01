@@ -6,6 +6,9 @@
 
 <polymer-element name="sign-in">
   <template>
+    <style>
+    </style>
+    
     <div class="container">
       <paper-tabs selected="0">
         <paper-tab on-click={{toggleSigninForm}}>Sign In</paper-tab>
@@ -19,11 +22,28 @@
       </form>
       
       <form id="registerForm" hidden?={{hiddenRegisterForm}}>
-        <paper-input type="email" label="E-mail Address" floatingLabel="true"></paper-input>
-        <paper-input type="text" label="Username" floatingLabel="true"></paper-input>
-        <paper-input type="password" label="Password" floatingLabel="true"></paper-input>
-        <paper-input type="password" label="Confirmed Password" floatingLabel="true"></paper-input>
-        <paper-button raised="true" class="registerButton" role="button">Register</paper-button>
+        <paper-input type="email" id="email" label="E-mail Address" 
+                     floatingLabel="true" required=true 
+                     value="{{user.email}}">
+        </paper-input>
+        <paper-input type="text" label="Name" floatingLabel="true" 
+                        value="{{user.name}}">
+        </paper-input>
+        <paper-input type="password" label="Password" 
+                     floatingLabel="true" required=true 
+                     value="{{user.password}}">
+        </paper-input>
+        <paper-input type="password" label="Confirmed Password" 
+                     floatingLabel="true"  
+                     value="{{user.confirmPassword}}">
+        </paper-input>
+        <input type="file" label="Avatar" id="avatar" 
+                     on-change="{{prepareAvatar}}">
+
+        <paper-button raised="true" class="registerButton" role="button"
+                      on-click="{{registerUser}}">
+          Register
+        </paper-button>
       </form>
     </div>
       
