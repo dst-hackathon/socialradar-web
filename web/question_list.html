@@ -20,7 +20,8 @@
     </template>
     <question-dropdown questions="{{categories}}" on-core-select="{{categorySelect}}"></question-dropdown>
     <question-dropdown questions="{{options}}" on-core-select="{{optionSelect}}"></question-dropdown>
-    <paper-button raised>Go</paper-button>
+    <paper-button raised on-click="{{add}}">Add</paper-button>
+    <paper-button raised on-click="{{go}}">Go</paper-button>
   </template>
   <script type="application/dart" src="question_list.dart"></script>
 </polymer-element>

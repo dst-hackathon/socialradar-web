@@ -5,17 +5,21 @@ import 'dart:async' show Future;
 import 'question.dart' show Question;
 import 'category.dart' show Category;
 import 'option.dart' show Option;
-import 'package:core_elements/core_item.dart' show CoreItem;
+import 'package:paper_elements/paper_item.dart' show PaperItem;
 
 @CustomTag('question-list')
 class QuestionList extends PolymerElement {
   static const String QUESTIONS_PATH = "http://api.radar.codedeck.com/questions";
   
   @observable List<Question> questions = toObservable([]);
+  Question selectedQuestion;
   @observable List<Category> categories = toObservable([]);
-  Map<String, Category> categoryMap = {};
+  Category selectedCategory;
   @observable List<Option> options = toObservable([]);
+  Option selectedOption;
   
+  // Dynamic map to put answer to the server.
+  @observable Map answerMap = {};
   
   QuestionList.created() : super.created() {
     //retrieveQuestions();
@@ -39,25 +43,26 @@ class QuestionList extends PolymerElement {
   questionClick(Event e, var detail, Node target) {
     e.preventDefault();
     print("Question clicked");
-    
-    String selectedQuestion = target.attributes["value"];
-    retrieveCategoryList(selectedQuestion);
+    String id = target.attributes["value"];
+    this.selectedQuestion = questions.where((e) => e.id == id).first;
+    this.selectedCategory = null;
+    this.selectedOption = null;
+    retrieveCategoryList(id);
   }
   
   
   retrieveCategoryList(String questionId) {
     print("Selected question: $questionId");
-    HttpRequest.getString(QUESTIONS_PATH + "/$questionId").then(parseCategory);
+//    HttpRequest.getString(QUESTIONS_PATH + "/$questionId").then(parseCategory);
+    HttpRequest.getString("categories.json").then(parseCategory);
   }
   
   parseCategory(String jsonString) {
     List categoryList = JSON.decode(jsonString);
     this.categories = [];
-    this.categoryMap = {};
     for( var c in categoryList ) {
       Category category = new Category(c["id"], c["order"], c["text"]);
       this.categories.add(category);
-      this.categoryMap[c["id"]] = category;
       for(var o in c["options"]) {
         Option option = new Option(o["id"], o["order"], o["text"]);
         category.options.add(option);
@@ -66,22 +71,63 @@ class QuestionList extends PolymerElement {
   }
   
   categorySelect(Event e, var detail, Node target) {
+    this.options = null;
+    this.selectedOption = null;
+    
     if( detail["isSelected"] ) {
-      CoreItem c = detail["item"] as CoreItem;
+      PaperItem c = detail["item"] as PaperItem;
       String id = c.getAttribute("value");
-      this.options = this.categoryMap[id].options;
+      selectedCategory = this.categories.where((c) =>  c.id == id
+      ).first;
+      this.options = selectedCategory.options;
+      
       print("Category  $id selected.");
     }
-    else {
-      this.options = [];
-    }
+   
   }
   
   optionSelect(Event e, var detail, Node target) {
     if( detail["isSelected"] ) {
-      CoreItem c = detail["item"] as CoreItem;
+      PaperItem c = detail["item"] as PaperItem;
       String id = c.getAttribute("value");
+      this.selectedOption = this.options.where((e) => e.id == id).first;
       print("Option  $id selected.");
     }
+  }
+  
+  add() {
+    if( answerMap == null ) {
+      answerMap = {};
+    }
+    if( answerMap[this.selectedQuestion.id] == null ) {
+      answerMap[this.selectedQuestion.id] = {};
+    }
+    if(answerMap[this.selectedQuestion.id][this.selectedCategory.id] == null ) {
+      answerMap[this.selectedQuestion.id][this.selectedCategory.id] = [];
+    }
+    bool addToAnswerList = this.selectedOption != null 
+        && !(answerMap[this.selectedQuestion.id][this.selectedCategory.id] as List<String>).contains(this.selectedOption.id);
+    
+    if( addToAnswerList ) {
+      answerMap[this.selectedQuestion.id][this.selectedCategory.id].add(this.selectedOption.id);
+    }
+    print(JSON.encode(answerMap));
+  }
+  
+  go() {
+    String user = "abc";
+    HttpRequest.
+//    http.post("http://api.radar.codedeck.com/users/$user/answer", answerMap).then(postSuccess);
+    HttpRequest.postFormData("http://api.radar.codedeck.com/users/$user/answer", JSON.encode(answerMap) ).then(postSuccess);
+  }
+  
+  postSuccess(HttpRequest resp) {
+    if(resp.response["success"] == "true") {
+      // Go to next screen.
+    }
+  }
+  
+  String get currentAnswer {
+    return JSON.encode(answerMap);
   }
 }
