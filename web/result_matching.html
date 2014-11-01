@@ -1,0 +1,77 @@
+<link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="packages/core_elements/core_icon.html">
+<link rel="import" href="packages/paper_elements/paper_button.html">
+
+<polymer-element name="result-matching">
+  <template>
+    <div class="container">
+      <div>You are matching with: {{results[currentPage].id}}</div>
+      <div>
+        <template repeat="{{s in stars}}">
+          <core-icon class="star" src="star.png"></core-icon>
+        </template>
+      </div>
+      <div>
+        <core-icon class="big" src="{{results[currentPage].picture}}.png"></core-icon>
+      </div>
+      <div>{{results[currentPage].email}}</div>
+      <div>
+        <table style="width: 100%;">
+          <tr>
+            <td align="left">
+              <paper-button raised style="overflow: visible;" on-click={{seePreviousMatching}}>
+                <core-icon src=previous.png class="arrowButton"></core-icon>
+                  Previous
+              </paper-button>
+            </td>
+            <td align="right">
+              <paper-button raised style="overflow: visible;" on-click={{seeNextMatching}}>
+                  Next
+                <core-icon src=next.png class="arrowButton"></core-icon>
+              </paper-button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <style>
+      .container {
+        margin-top: 20px;
+        color: #f98906;
+        font-size: 30px;
+      }
+      
+      div {
+        text-align: center;
+        padding-top: 20px;
+      }
+      
+      .rightButton {
+        text-align: right;
+        padding-right: 30px;
+      }
+      
+      .big {
+        height: 256px;
+        width: 256px;
+        border-color: black;
+        border-style: solid;
+        border-width: medium;
+      }
+      
+      .arrowButton {
+        height: 30px;
+        width: 40px;
+      }
+      
+      paper-button {
+        background-color: #f98906;
+        color: #ffffff;
+        font-size: 20px;
+      }
+      
+    </style>
+  </template>
+  <script type="application/dart" src="result_matching.dart"></script>
+  
+</polymer-element>

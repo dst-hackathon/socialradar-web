@@ -82,27 +82,15 @@
               <div class="rightButton">
                 <paper-icon-button src="right.png" on-click={{add}}></paper-icon-button>
               </div>
-              <div class="rightButton">
+              <!--div class="rightButton">
                 <paper-icon-button src="left.png" on-click={{add}}></paper-icon-button>
-              </div>
+              </div -->
             </td>
             <td>
               <core-selector class="list" selected="0">
-                <div class="item">Item 1</div>
-                <div class="item">Item 2</div>
-                <div class="item">Item 3</div>
-                <div class="item">Item 1</div>
-                <div class="item">Item 2</div>
-                <div class="item">Item 3</div>
-                <div class="item">Item 1</div>
-                <div class="item">Item 2</div>
-                <div class="item">Item 3</div>
-                <div class="item">Item 1</div>
-                <div class="item">Item 2</div>
-                <div class="item">Item 3</div>
-                <div class="item">Item 1</div>
-                <div class="item">Item 2</div>
-                <div class="item">Item 3</div>
+              <template if="{{!selectedItems.isEmpty}}" repeat="{{item in selectedItems}}">
+                <div class="item">{{item}}</div>
+              </template>
               </core-selector>
             </td>
           </tr>
