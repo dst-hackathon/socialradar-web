@@ -8,6 +8,16 @@
 <polymer-element name="question-dropdown">
   <template>
     <style>
+    paper-dropdown-menu{
+    font-size: 100%;
+    min-width: 15em;
+    }
+    
+    paper-dropdown-menu::shadow #dropdown {
+      max-width: 40em;
+      min-width: 15em;
+      border: 1px #ccc;
+    }
     </style>
 <!--    <template if="{{!questions.isEmpty}}">
       <core-dropdown-menu>
