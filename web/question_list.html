@@ -18,8 +18,8 @@
       <template if="{{!questions.isEmpty}}">
         <paper-tabs selected="0">
           <template repeat="{{q in questions}}">
-            <paper-tab on-click={{questionClick}} value="{{q.id}}">
-              <paper-item iconSrc="{{q.tag}}.png"></paper-item>
+            <paper-tab on-click={{questionClick}} on-mouseover={{questionMouseOver}} on-mouseout={{questionMouseOut}} value="{{q.id}}">
+              <paper-item iconSrc="{{q.tag}}.png" text="{{q.text}}"></paper-item>
             </paper-tab>
           </template>
         </paper-tabs>
