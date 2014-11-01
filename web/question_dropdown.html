@@ -18,21 +18,23 @@
       border: 1px #ccc;
     }
     </style>
-<!--    <template if="{{!questions.isEmpty}}">
-      <core-dropdown-menu>
-        <template repeat="{{question in questions}}">
-          <paper-item label="{{question.text}}" value="{{question.id}}"></paper-item>
-        </template>
-      </core-dropdown-menu>
-    </template>-->
-    <div>
+    <template if="{{!questions.isEmpty}}">
+      <div>
+        <paper-dropdown-menu valueattr="label">
+          <template repeat="{{question in questions}}">
+            <paper-item label="{{question.text}}" value="{{question.id}}"></paper-item>
+          </template>
+        </paper-dropdown-menu>
+      </div>
+    </template>
+    <!-- div>
       <paper-dropdown-menu selected="all" label="What kind of sport?">
         <paper-item label="all"></paper-item>
         <paper-item label="basketball"></paper-item>
         <paper-item label="football"></paper-item>
         <paper-item label="tennis"></paper-item>
       </paper-dropdown-menu>
-    </div>
+    </div -->
   </template>
   <script type="application/dart" src="question_dropdown.dart"></script>
 </polymer-element>
