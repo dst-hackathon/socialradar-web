@@ -2,6 +2,7 @@
 <link rel="import" href="packages/paper_elements/paper_button.html">
 <link rel="import" href="packages/core_elements/core_scroll_header_panel.html">
 <link rel="import" href="packages/core_elements/core_toolbar.html">
+<link rel="import" href="packages/core_elements/core_selector.html">
 <link rel="import" href="packages/paper_elements/paper_tabs.html">
 <link rel="import" href="packages/paper_elements/paper_tab.html">
 <link rel="import" href="packages/paper_elements/paper_icon_button.html">
@@ -15,7 +16,7 @@
       }
       
       .questionLabel {
-        margin-top: 50px;
+        margin-top: 30px;
         padding-left: 30px;
         color: #f98906;
         font-weight: bolder;
@@ -24,10 +25,40 @@
       }
       
       .questionContainer {
-        margin-top: 50px;
+        margin-top: 20px;
         padding-left: 30px;
+        padding-right: 30px;
         color: #f98906;
         font-size: 20px;
+      }
+      
+      table {
+        width: 100%;
+      }
+      
+      td {
+        width: 50%;
+        vertical-align: top;
+        font-size: 20px;
+      }
+      
+      .rightButton {
+        text-align: right;
+        padding-right: 30px;
+      }
+      
+      core-selector {
+        height: 250px;
+      }
+      
+      .item.core-selected {
+        background: #eee;
+      }
+      
+      .list.core-selected {
+        display: block;
+        height: 250px;
+        overflow: auto;
       }
 
     </style>
@@ -43,11 +74,41 @@
         <div class="questionLabel">{{questionLabel}}</div>
       </template>
       <div class="questionContainer">
-        <question-dropdown questions="{{categories}}" on-core-select="{{categorySelect}}"></question-dropdown>
-        <question-dropdown questions="{{options}}" on-core-select="{{optionSelect}}"></question-dropdown>
+        <table>
+          <tr>
+            <td>
+              <question-dropdown questions="{{categories}}" on-core-select="{{categorySelect}}"></question-dropdown>
+              <question-dropdown questions="{{options}}" on-core-select="{{optionSelect}}"></question-dropdown>
+              <div class="rightButton">
+                <paper-icon-button src="right.png" on-click={{add}}></paper-icon-button>
+              </div>
+              <div class="rightButton">
+                <paper-icon-button src="left.png" on-click={{add}}></paper-icon-button>
+              </div>
+            </td>
+            <td>
+              <core-selector class="list" selected="0">
+                <div class="item">Item 1</div>
+                <div class="item">Item 2</div>
+                <div class="item">Item 3</div>
+                <div class="item">Item 1</div>
+                <div class="item">Item 2</div>
+                <div class="item">Item 3</div>
+                <div class="item">Item 1</div>
+                <div class="item">Item 2</div>
+                <div class="item">Item 3</div>
+                <div class="item">Item 1</div>
+                <div class="item">Item 2</div>
+                <div class="item">Item 3</div>
+                <div class="item">Item 1</div>
+                <div class="item">Item 2</div>
+                <div class="item">Item 3</div>
+              </core-selector>
+            </td>
+          </tr>
+        </table>
+        <div class="rightButton"><paper-button raised on-click="{{go}}">Go</paper-button></div>
       </div>
-      <paper-button raised on-click="{{add}}">Add</paper-button>
-      <paper-button raised on-click="{{go}}">Go</paper-button>
     </div>
   </template>
   <script type="application/dart" src="question_list.dart"></script>
