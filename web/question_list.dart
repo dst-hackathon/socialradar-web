@@ -18,7 +18,9 @@ class QuestionList extends PolymerElement {
   
   
   QuestionList.created() : super.created() {
-    retrieveQuestions();
+    //retrieveQuestions();
+    String json = '[{"id": "1", "order": "1", "text": "What are your favorite menus?"},{"id": "2", "order": "2", "text": "What sports do you play?"}]';
+    parseQuestion(json);
   }
   
   retrieveQuestions() {
@@ -29,7 +31,7 @@ class QuestionList extends PolymerElement {
       List questions = JSON.decode(jsonString);
       this.questions = [];
       for( var question in questions ) {
-        Question q = new Question(question["id"], question["order"], question["text"]);
+        Question q = new Question(question["id"], question["order"], question["text"], question["type"]);
         this.questions.add(q);
       }
   }
@@ -38,8 +40,7 @@ class QuestionList extends PolymerElement {
     e.preventDefault();
     print("Question clicked");
     
-    // Use its text to query for now.
-    String selectedQuestion = target.text;
+    String selectedQuestion = target.attributes["value"];
     retrieveCategoryList(selectedQuestion);
   }
   
