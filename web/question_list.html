@@ -13,19 +13,39 @@
       .container {
         margin-top: 20px;
       }
+      
+      .questionLabel {
+        margin-top: 50px;
+        padding-left: 30px;
+        color: #f98906;
+        font-weight: bolder;
+        font-size: 40px;
+        font-family: cursive;
+      }
+      
+      .questionContainer {
+        margin-top: 50px;
+        padding-left: 30px;
+        color: #f98906;
+        font-size: 20px;
+      }
+
     </style>
     <div class="container">
       <template if="{{!questions.isEmpty}}">
         <paper-tabs selected="0">
           <template repeat="{{q in questions}}">
-            <paper-tab on-click={{questionClick}} on-mouseover={{questionMouseOver}} on-mouseout={{questionMouseOut}} value="{{q.id}}">
-              <paper-item iconSrc="{{q.tag}}.png" text="{{q.text}}"></paper-item>
+            <paper-tab on-click={{questionClick}} on-mouseover={{questionMouseOver}} on-mouseout={{questionMouseOut}} value="{{q.id}}" text="{{q.text}}">
+              <paper-icon-button src="{{q.tag}}.png"></paper-icon-button>
             </paper-tab>
           </template>
         </paper-tabs>
+        <div class="questionLabel">{{questionLabel}}</div>
       </template>
-      <question-dropdown questions="{{categories}}" on-core-select="{{categorySelect}}"></question-dropdown>
-      <question-dropdown questions="{{options}}" on-core-select="{{optionSelect}}"></question-dropdown>
+      <div class="questionContainer">
+        <question-dropdown questions="{{categories}}" on-core-select="{{categorySelect}}"></question-dropdown>
+        <question-dropdown questions="{{options}}" on-core-select="{{optionSelect}}"></question-dropdown>
+      </div>
       <paper-button raised>Go</paper-button>
     </div>
   </template>
