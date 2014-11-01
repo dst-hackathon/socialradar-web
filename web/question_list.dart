@@ -19,7 +19,7 @@ class QuestionList extends PolymerElement {
   
   QuestionList.created() : super.created() {
     //retrieveQuestions();
-    String json = '[{"id": "1", "order": "1", "text": "What are your favorite menus?"},{"id": "2", "order": "2", "text": "What sports do you play?"}]';
+    String json = '[{"id": "1", "order": "1", "text": "What are your favorite menus?", "tag": "food"},{"id": "2", "order": "2", "text": "What sports do you play?", "tag": "sport"}]';
     parseQuestion(json);
   }
   
@@ -31,7 +31,7 @@ class QuestionList extends PolymerElement {
       List questions = JSON.decode(jsonString);
       this.questions = [];
       for( var question in questions ) {
-        Question q = new Question(question["id"], question["order"], question["text"], question["type"]);
+        Question q = new Question(question["id"], question["order"], question["text"], question["tag"]);
         this.questions.add(q);
       }
   }

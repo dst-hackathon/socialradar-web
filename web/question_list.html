@@ -10,17 +10,24 @@
 <polymer-element name="question-list">
   <template>
     <style>
+      .container {
+        margin-top: 20px;
+      }
     </style>
-    <template if="{{!questions.isEmpty}}">
-      <paper-tabs selected="0">
-        <template repeat="{{q in questions}}">
-          <paper-tab on-click={{questionClick}} value="{{q.id}}"><paper-icon-button src="test.png"></paper-icon-button></paper-tab>
-        </template>
-      </paper-tabs>
-    </template>
-    <question-dropdown questions="{{categories}}" on-core-select="{{categorySelect}}"></question-dropdown>
-    <question-dropdown questions="{{options}}" on-core-select="{{optionSelect}}"></question-dropdown>
-    <paper-button raised>Go</paper-button>
+    <div class="container">
+      <template if="{{!questions.isEmpty}}">
+        <paper-tabs selected="0">
+          <template repeat="{{q in questions}}">
+            <paper-tab on-click={{questionClick}} value="{{q.id}}">
+              <paper-item iconSrc="{{q.tag}}.png"></paper-item>
+            </paper-tab>
+          </template>
+        </paper-tabs>
+      </template>
+      <question-dropdown questions="{{categories}}" on-core-select="{{categorySelect}}"></question-dropdown>
+      <question-dropdown questions="{{options}}" on-core-select="{{optionSelect}}"></question-dropdown>
+      <paper-button raised>Go</paper-button>
+    </div>
   </template>
   <script type="application/dart" src="question_list.dart"></script>
 </polymer-element>

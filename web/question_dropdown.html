@@ -3,17 +3,27 @@
 <link rel="import" href="packages/core_elements/core_scroll_header_panel.html">
 <link rel="import" href="packages/core_elements/core_toolbar.html">
 <link rel="import" href="packages/core_elements/core_dropdown_menu.html">
+<link rel="import" href="packages/paper_elements/paper_dropdown_menu.html">
+<link rel="import" href="packages/paper_elements/paper_item.html">
 <polymer-element name="question-dropdown">
   <template>
     <style>
     </style>
-    <template if="{{!questions.isEmpty}}">
+<!--    <template if="{{!questions.isEmpty}}">
       <core-dropdown-menu>
         <template repeat="{{question in questions}}">
           <core-item label="{{question.text}}" value="{{question.id}}"></core-item>
         </template>
       </core-dropdown-menu>
-    </template>
+    </template>-->
+    <div>
+      <paper-dropdown-menu selected="all" label="What kind of sport?">
+        <paper-item label="all"></paper-item>
+        <paper-item label="basketball"></paper-item>
+        <paper-item label="football"></paper-item>
+        <paper-item label="tennis"></paper-item>
+      </paper-dropdown-menu>
+    </div>
   </template>
   <script type="application/dart" src="question_dropdown.dart"></script>
 </polymer-element>
