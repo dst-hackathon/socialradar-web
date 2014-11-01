@@ -1,7 +1,6 @@
 import 'package:polymer/polymer.dart';
 import 'dart:html' show Event, Node, HttpRequest;
 import 'dart:convert' show JSON;
-import 'dart:async' show Future;
 import 'question.dart' show Question;
 import 'category.dart' show Category;
 import 'option.dart' show Option;
@@ -17,14 +16,16 @@ class QuestionList extends PolymerElement {
   Category selectedCategory;
   @observable List<Option> options = toObservable([]);
   Option selectedOption;
+  @observable String questionLabel = "";
   
   // Dynamic map to put answer to the server.
   @observable Map answerMap = {};
   
   QuestionList.created() : super.created() {
     //retrieveQuestions();
-    String json = '[{"id": "1", "order": "1", "text": "What are your favorite menus?"},{"id": "2", "order": "2", "text": "What sports do you play?"}]';
+    String json = '[{"id": "1", "order": "1", "text": "What are your favorite menus?", "tag": "food"},{"id": "2", "order": "2", "text": "What sports do you play?", "tag": "sport"},{"id": "3", "order": "3", "tag": "movie", "text": "What are your favorite movies?"},{"id": "4", "order": "4", "tag": "music", "text": "What do music genres belong to you?"},{"id": "5", "order": "5", "tag": "book", "text": "What are your favorite books?"}]';
     parseQuestion(json);
+    questionLabel = questions[0].text;
   }
   
   retrieveQuestions() {
@@ -35,7 +36,7 @@ class QuestionList extends PolymerElement {
       List questions = JSON.decode(jsonString);
       this.questions = [];
       for( var question in questions ) {
-        Question q = new Question(question["id"], question["order"], question["text"], question["type"]);
+        Question q = new Question(question["id"], question["order"], question["text"], question["tag"]);
         this.questions.add(q);
       }
   }
@@ -44,17 +45,17 @@ class QuestionList extends PolymerElement {
     e.preventDefault();
     print("Question clicked");
     String id = target.attributes["value"];
+    questionLabel = target.attributes["text"];
     this.selectedQuestion = questions.where((e) => e.id == id).first;
     this.selectedCategory = null;
     this.selectedOption = null;
     retrieveCategoryList(id);
   }
   
-  
   retrieveCategoryList(String questionId) {
     print("Selected question: $questionId");
-//    HttpRequest.getString(QUESTIONS_PATH + "/$questionId").then(parseCategory);
-    HttpRequest.getString("categories.json").then(parseCategory);
+    HttpRequest.getString(QUESTIONS_PATH + "/$questionId").then(parseCategory);
+//    HttpRequest.getString("categories.json").then(parseCategory);
   }
   
   parseCategory(String jsonString) {

@@ -10,18 +10,45 @@
 <polymer-element name="question-list">
   <template>
     <style>
+      .container {
+        margin-top: 20px;
+      }
+      
+      .questionLabel {
+        margin-top: 50px;
+        padding-left: 30px;
+        color: #f98906;
+        font-weight: bolder;
+        font-size: 40px;
+        font-family: cursive;
+      }
+      
+      .questionContainer {
+        margin-top: 50px;
+        padding-left: 30px;
+        color: #f98906;
+        font-size: 20px;
+      }
+
     </style>
-    <template if="{{!questions.isEmpty}}">
-      <paper-tabs selected="0">
-        <template repeat="{{q in questions}}">
-          <paper-tab on-click={{questionClick}} value="{{q.id}}"><paper-icon-button src="test.png"></paper-icon-button></paper-tab>
-        </template>
-      </paper-tabs>
-    </template>
-    <question-dropdown questions="{{categories}}" on-core-select="{{categorySelect}}"></question-dropdown>
-    <question-dropdown questions="{{options}}" on-core-select="{{optionSelect}}"></question-dropdown>
-    <paper-button raised on-click="{{add}}">Add</paper-button>
-    <paper-button raised on-click="{{go}}">Go</paper-button>
+    <div class="container">
+      <template if="{{!questions.isEmpty}}">
+        <paper-tabs selected="0">
+          <template repeat="{{q in questions}}">
+            <paper-tab on-click={{questionClick}} on-mouseover={{questionMouseOver}} on-mouseout={{questionMouseOut}} value="{{q.id}}" text="{{q.text}}">
+              <paper-icon-button src="{{q.tag}}.png"></paper-icon-button>
+            </paper-tab>
+          </template>
+        </paper-tabs>
+        <div class="questionLabel">{{questionLabel}}</div>
+      </template>
+      <div class="questionContainer">
+        <question-dropdown questions="{{categories}}" on-core-select="{{categorySelect}}"></question-dropdown>
+        <question-dropdown questions="{{options}}" on-core-select="{{optionSelect}}"></question-dropdown>
+      </div>
+      <paper-button raised on-click="{{add}}">Add</paper-button>
+      <paper-button raised on-click="{{go}}">Go</paper-button>
+    </div>
   </template>
   <script type="application/dart" src="question_list.dart"></script>
 </polymer-element>
