@@ -5,7 +5,7 @@ import 'question.dart' show Question;
 
 @CustomTag('question-dropdown')
 class QuestionDropdown extends PolymerElement {
-  @published List<Question> questions = [];
+  @published List questions = [];
   
   QuestionDropdown.created() : super.created() {
   }

@@ -10,7 +10,7 @@
     <template if="{{!questions.isEmpty}}">
       <core-dropdown-menu>
         <template repeat="{{question in questions}}">
-          <core-item label="{{question.text}}"></core-item>
+          <core-item label="{{question.text}}" value="{{question.id}}"></core-item>
         </template>
       </core-dropdown-menu>
     </template>

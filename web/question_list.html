@@ -8,14 +8,15 @@
   <template>
     <style>
     </style>
-    <template if="{{!categories.isEmpty}}">
+    <template if="{{!questions.isEmpty}}">
       <ul>
-        <template repeat="{{cat in categories}}">
-          <li on-click="{{categoryClick}}">{{cat.id}}</li>
+        <template repeat="{{q in questions}}">
+          <li on-click="{{questionClick}}">{{q.id}}</li>
         </template>
       </ul>
     </template>
-    <question-dropdown questions="{{questions}}" on-core-select="{{questionSelect}}"></question-dropdown>
+    <question-dropdown questions="{{categories}}" on-core-select="{{categorySelect}}"></question-dropdown>
+    <question-dropdown questions="{{options}}" on-core-select="{{optionSelect}}"></question-dropdown>
     <paper-button raised>Go</paper-button>
   </template>
   <script type="application/dart" src="question_list.dart"></script>
